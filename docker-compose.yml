@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
     env_file: .env
     volumes:
-      - .:/code
+      - .:/app
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
