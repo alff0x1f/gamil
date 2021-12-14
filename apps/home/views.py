@@ -8,13 +8,24 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
+from .forms import AnketaForm
 
 
-@login_required(login_url="/login/")
+# @login_required(login_url="/login/")
 def index(request):
-    context = {'segment': 'index'}
+    form = AnketaForm(None)
+    if request.method == 'POST':
+        form = AnketaForm(request.POST, request.FILES)
 
-    html_template = loader.get_template('home/index.html')
+    html_template = loader.get_template('home/anketa.html')
+    context = {'segment': 'index', "form": form}
+
+    if request.method == "POST":
+        print(form.data)
+        if form.is_valid():
+            form.save(commit=True)
+            return HttpResponse('Форма сохранена')
+
     return HttpResponse(html_template.render(context, request))
 
 

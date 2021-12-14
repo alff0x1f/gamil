@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+    <div class="container">
+        <a class="navbar-brand" href="/" rel="tooltip"
+           title="Designed and Coded by Creative Tim" data-placement="bottom">
+            Опросник
+        </a>
+        <button class="navbar-toggler shadow-none ms-2" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navigation"
+                aria-controls="navigation" aria-expanded="false"
+                aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon mt-2">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </span>
+        </button>
+        <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 ms-lg-12 ps-lg-5"
+             id="navigation">
+            <ul class="navbar-nav navbar-nav-hover w-100">
+                <li class="nav-item ms-lg-auto">
+                    <a class="nav-link nav-link-icon me-2" href="/results"
+                       target="_blank">
+                        <p class="d-inline text-sm z-index-1 font-bold"
+                           data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           title="Посмотреть результаты">Результаты</p>
+                    </a>
+                </li>
+                <li class="nav-item my-auto ms-3 ms-lg-0">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}"
+                           class="btn btn-sm  bg-gradient-primary  btn-round mb-0 me-1 mt-2 mt-md-0">Выход</a>
+                    {% else %}
+                        <a href="{% url 'login' %}"
+                           class="btn btn-sm  bg-gradient-primary  btn-round mb-0 me-1 mt-2 mt-md-0">Вход</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+  

@@ -24,9 +24,9 @@ def login_view(request):
                 login(request, user)
                 return redirect("/")
             else:
-                msg = 'Invalid credentials'
+                msg = 'Неверные данные'
         else:
-            msg = 'Error validating the form'
+            msg = 'Ошибка валидации формы'
 
     return render(request, "accounts/login.html", {"form": form, "msg": msg})
 
@@ -43,14 +43,15 @@ def register_user(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(username=username, password=raw_password)
 
-            msg = 'User created - please <a href="/login">login</a>.'
+            msg = 'Пользователь создан - <a href="/login">войти</a>.'
             success = True
 
-            # return redirect("/login/")
+            return redirect("/login/")
 
         else:
-            msg = 'Form is not valid'
+            msg = 'Данные неверны'
     else:
         form = SignUpForm()
 
-    return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+    return render(request, "accounts/register.html",
+                  {"form": form, "msg": msg, "success": success})
