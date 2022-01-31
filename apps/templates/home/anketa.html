@@ -1,4 +1,5 @@
 {% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
 
 {% block title %} Presentation {% endblock title %}
 
@@ -16,68 +17,24 @@
                     <div class="card d-flex blur justify-content-center p-4 shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
                         <div class="text-center">
                             <h3 class="text-gradient text-primary">Опросник</h3>
-                            <p class="mb-0">
+                            <p class="mb-3">
                                 Демо реестра и сохранения данных
                             </p>
                         </div>
-                        <form role="form" id="contact-form" method="post" enctype="multipart/form-data"
-                              autocomplete="off">
+                        {% bootstrap_messages %}
+                        <form method="post" class="form" role="form">
                             {% csrf_token %}
-                            <div class="card-body pb-2">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        {{ form.full_name.label_tag }}
-                                        {{ form.full_name }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.city.label_tag }}
-                                        {{ form.city }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.email.label_tag }}
-                                        {{ form.email }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.age.label_tag }}
-                                        {{ form.age }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.color.label_tag }}
-                                        {{ form.color }}
-                                    </div>
-                                    <div class="col-md-12">
-                                        {{ form.file.label_tag }}
-                                        {{ form.file }}
-                                    </div>
-                                    <div class="col-md-12">
-                                        {{ form.long_text.label_tag }}
-                                        {{ form.long_text }}
-                                    </div>
-                                    <div class="row">
-                                        {% if form.errors %}
-                                            {% for field in form %}
-                                                {% for error in field.errors %}
-                                                    <div class="alert alert-danger">
-                                                        <strong>{{ error|escape }}</strong>
-                                                    </div>
-                                                {% endfor %}
-                                            {% endfor %}
-                                            {% for error in form.non_field_errors %}
-                                                <div class="alert alert-danger">
-                                                    <strong>{{ error|escape }}</strong>
-                                                </div>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 text-center">
-                                            <button type="submit"
-                                                    class="btn bg-gradient-primary mt-3 mb-0">
-                                                Отправить
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                            {% bootstrap_form form layout='horizontal' %}
+                            {% bootstrap_button button_type="submit" content="Отправить" %}
+                            <input type="hidden" name="form_type" value="base_info_form">
+                        </form>
+
+                        <h3 class="mb-3 mt-5">Менструальная функция </h3>
+                        <form method="post" class="form" role="form">
+                            {% csrf_token %}
+                            {% bootstrap_form periods_form layout='horizontal' %}
+                            {% bootstrap_button button_type="submit" content="Отправить" %}
+                            <input type="hidden" name="form_type" value="periods_form">
                         </form>
                     </div>
                 </div>

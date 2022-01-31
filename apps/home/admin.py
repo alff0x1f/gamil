@@ -4,6 +4,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from django.contrib import admin
-from .models import Anketa
+from .models import BaseAnketa, PeriodsAnketa
 
-admin.site.register(Anketa)
+admin.site.register(BaseAnketa)
+admin.site.register(PeriodsAnketa)
