@@ -9,7 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 
-from .forms import AnketaForm, PeriodsForm
+from .forms import AnketaForm, PeriodsForm, DoctorForm, ArteryEmbolizationForm
 
 
 # @login_required(login_url="/login/")
@@ -17,6 +17,8 @@ def index(request):
     forms = {
         "form": AnketaForm(None),
         "periods_form": PeriodsForm(None),
+        "doctor_form": DoctorForm(None),
+        "artery_embolization_form": ArteryEmbolizationForm(None),
     }
 
     if request.method == "POST":
@@ -25,6 +27,10 @@ def index(request):
             forms[form_type] = AnketaForm(request.POST, request.FILES)
         if form_type == "periods_form":
             forms[form_type] = PeriodsForm(request.POST)
+        if form_type == "doctor_form":
+            forms[form_type] = DoctorForm(request.POST)
+        if form_type == "artery_embolization_form":
+            forms[form_type] = ArteryEmbolizationForm(request.POST)
 
     html_template = loader.get_template("home/anketa.html")
     context = {"segment": "index", **forms}
@@ -39,6 +45,16 @@ def index(request):
         if form_type == "periods_form" and forms[form_type].is_valid():
             forms[form_type].save(commit=True)
             return HttpResponse("Форма Менструальная функция сохранена")
+
+        if form_type == "doctor_form" and forms[form_type].is_valid():
+            forms[form_type].save(commit=True)
+            return HttpResponse("Форма врача сохранена")
+
+        if form_type == "artery_embolization_form" and forms[form_type].is_valid():
+            forms[form_type].save(commit=True)
+            return HttpResponse(
+                "Техника выполнения селективной эмболизации маточных артерий"
+            )
 
     return HttpResponse(html_template.render(context, request))
 

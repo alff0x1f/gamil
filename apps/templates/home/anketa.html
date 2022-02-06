@@ -36,6 +36,28 @@
                             {% bootstrap_button button_type="submit" content="Отправить" %}
                             <input type="hidden" name="form_type" value="periods_form">
                         </form>
+
+                        <h3 class="mb-3 mt-5">Заполняет врач</h3>
+                        <form method="post" class="form" role="form">
+                            {% csrf_token %}
+                            {% bootstrap_form doctor_form layout='horizontal' %}
+                            {#                            {% bootstrap_field field='mioma1' layout='horizontal' %}#}
+                            {#                            <h4>Ручная форма</h4>#}
+                            {#                            {% bootstrap_field doctor_form.mioma1 layout='horizontal' %}#}
+                            {% bootstrap_button button_type="submit" content="Отправить" %}
+                            <input type="hidden" name="form_type" value="doctor_form">
+                        </form>
+                        <h3 class="mb-3 mt-5">Техника выполнения селективной эмболизации
+                            маточных артерий
+                        </h3>
+                        <p>Для заполнения врачом радиологом</p>
+                        <form method="post" class="form" role="form">
+                            {% csrf_token %}
+                            {% bootstrap_form artery_embolization_form layout='horizontal' %}
+                            <input type="hidden" name="form_type"
+                                   value="artery_embolization_form">
+                            {% bootstrap_button button_type="submit" content="Отправить" %}
+                        </form>
                     </div>
                 </div>
             </div>
