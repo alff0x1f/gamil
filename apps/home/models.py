@@ -3,7 +3,6 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -82,6 +81,10 @@ class BaseAnketa(models.Model):
     def __str__(self):
         return f"{self.full_name} - {self.age}"
 
+    class Meta:
+        verbose_name = "Базовая анкета"
+        verbose_name_plural = "Базовые анкеты"
+
 
 class PeriodsAnketa(models.Model):
     menarche = models.CharField(max_length=20, choices=Menarche.choices)
@@ -126,6 +129,10 @@ class PeriodsAnketa(models.Model):
     complaints_5 = models.BooleanField("«мазня» в середине цикла")
     complaints_6 = models.BooleanField("снижение показателя гемоглобина")
     hemoglobin = models.FloatField("Гемоглобин", null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Менструальная функция"
+        verbose_name_plural = "Менструальная функция"
 
 
 class DoctorAnketa(models.Model):
@@ -206,6 +213,11 @@ class DoctorAnketa(models.Model):
         "Признаки нарушения кровообращения в узлах миомы матки (некроз, отек, гиалиноз)."
     )
 
+    # Заполняет врач
+    class Meta:
+        verbose_name = "Анкета врача"
+        verbose_name_plural = "Анкеты врачей"
+
 
 class ArteryEmbolizationModel(models.Model):
     """Контрольные точки динамического наблюдения пациенток после проведенной ЭМА  """
@@ -262,3 +274,7 @@ class ArteryEmbolizationModel(models.Model):
     with_adenomyosis = models.BooleanField(
         "Сочетание с аденомиозом", null=True, blank=True
     )
+
+    class Meta:
+        verbose_name = "Cелективная эмболизация маточных артерий"
+        verbose_name_plural = "Cелективные эмболизации маточных артерий"
