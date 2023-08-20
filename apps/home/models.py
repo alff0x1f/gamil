@@ -71,6 +71,7 @@ class ControlPoints(models.TextChoices):
 
 
 class BaseAnketa(models.Model):
+    owner = models.ForeignKey("auth.User", on_delete=models.CASCADE, null=True)
     full_name = models.CharField("ФИО", max_length=200)
     country = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
@@ -87,6 +88,7 @@ class BaseAnketa(models.Model):
 
 
 class PeriodsAnketa(models.Model):
+    base_anketa = models.ForeignKey(BaseAnketa, on_delete=models.CASCADE, null=True)
     menarche = models.CharField(max_length=20, choices=Menarche.choices)
     periods_type = models.CharField(max_length=20, choices=PeriodsType.choices)
     year_break = models.IntegerField()
@@ -136,6 +138,7 @@ class PeriodsAnketa(models.Model):
 
 
 class DoctorAnketa(models.Model):
+    base_anketa = models.ForeignKey(BaseAnketa, on_delete=models.CASCADE, null=True)
     contraception = models.CharField(
         "Классификация миомы матки Международной федерации гинекологии и акушерства",
         max_length=100,
@@ -220,8 +223,9 @@ class DoctorAnketa(models.Model):
 
 
 class ArteryEmbolizationModel(models.Model):
-    """Контрольные точки динамического наблюдения пациенток после проведенной ЭМА  """
+    """Контрольные точки динамического наблюдения пациенток после проведенной ЭМА"""
 
+    base_anketa = models.ForeignKey(BaseAnketa, on_delete=models.CASCADE, null=True)
     control_points = models.CharField(
         "Контрольные точки динамического наблюдения пациенток после проведенной ЭМА",
         max_length=20,

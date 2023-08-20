@@ -17,9 +17,7 @@ YES_OR_NO = ((True, "Да"), (False, "Нет"))
 
 class AnketaForm(ModelForm):
     full_name = forms.CharField(
-        widget=forms.TextInput(
-            attrs={"placeholder": "Фамилия Имя Отчество"}
-        ),
+        widget=forms.TextInput(attrs={"placeholder": "Фамилия Имя Отчество"}),
         label="ФИО:",
     )
     country = forms.CharField(
@@ -33,7 +31,10 @@ class AnketaForm(ModelForm):
         label="Город",
     )
     age = forms.CharField(
-        widget=forms.RadioSelect(choices=Age.choices, ), label="Возраст",
+        widget=forms.RadioSelect(
+            choices=Age.choices,
+        ),
+        label="Возраст",
     )
     height = forms.IntegerField(
         min_value=30,
@@ -53,6 +54,7 @@ class AnketaForm(ModelForm):
     class Meta:
         model = BaseAnketa
         fields = "__all__"
+        exclude = ("owner",)
 
 
 class PeriodsForm(ModelForm):
@@ -65,11 +67,16 @@ class PeriodsForm(ModelForm):
     #     widget=forms.Textarea(attrs={"class": "form-control",}), label="Длинный текст"
     # )
     menarche = forms.CharField(
-        widget=forms.RadioSelect(choices=Menarche.choices, ),
+        widget=forms.RadioSelect(
+            choices=Menarche.choices,
+        ),
         label="С menarche до постановки диагноза",
     )
     periods_type = forms.CharField(
-        widget=forms.RadioSelect(choices=PeriodsType.choices, ), label="Тип",
+        widget=forms.RadioSelect(
+            choices=PeriodsType.choices,
+        ),
+        label="Тип",
     )
     year_break = forms.IntegerField(
         max_value=2022,
@@ -80,11 +87,16 @@ class PeriodsForm(ModelForm):
         label="Год нарушения менструального цикла",
     )
     periods_break_variant = forms.CharField(
-        widget=forms.RadioSelect(choices=Menarche.choices, ),
+        widget=forms.RadioSelect(
+            choices=Menarche.choices,
+        ),
         label="Вариант нарушения менструального цикла",
     )
     break_type = forms.CharField(
-        widget=forms.RadioSelect(choices=PeriodsType.choices, ), label="Тип",
+        widget=forms.RadioSelect(
+            choices=PeriodsType.choices,
+        ),
+        label="Тип",
     )
     blood = forms.TypedChoiceField(
         coerce=lambda x: x == "True",
@@ -93,7 +105,10 @@ class PeriodsForm(ModelForm):
         label="Маточные кровотечения в анамнезе",
     )
     blood_year = forms.IntegerField(
-        max_value=2022, min_value=1900, label="Год", required=False,
+        max_value=2022,
+        min_value=1900,
+        label="Год",
+        required=False,
     )
     pregnancy_parity = forms.IntegerField(
         max_value=100, min_value=0, label="Паритет беременностей", required=False
@@ -117,21 +132,27 @@ class PeriodsForm(ModelForm):
         label="В том числе программы ВРТ",
     )
     contraception = forms.CharField(
-        widget=forms.RadioSelect(choices=Contraception.choices, ), label="Контрацепция",
+        widget=forms.RadioSelect(
+            choices=Contraception.choices,
+        ),
+        label="Контрацепция",
     )
 
     class Meta:
         model = PeriodsAnketa
         fields = "__all__"
+        exclude = ("base_anketa",)
 
 
 class DoctorForm(ModelForm):
     class Meta:
         model = DoctorAnketa
         fields = "__all__"
+        exclude = ("base_anketa",)
 
 
 class ArteryEmbolizationForm(ModelForm):
     class Meta:
         model = ArteryEmbolizationModel
         fields = "__all__"
+        exclude = ("base_anketa",)

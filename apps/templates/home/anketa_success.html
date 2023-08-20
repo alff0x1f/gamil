@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %} Success {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} index-page {% endblock body_class %}
+
+{% block content %}
+    {% include "includes/navigation-light2.html" %}
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="formSplashModalLabel">Анкета
+                                закончена, спасибо!</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Данные анкеты успешно сохранены.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{% url 'home' %}" class="btn btn-primary">На
+                                главную</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+    <script src="/static/assets/js/soft-design-system.min.js?v=1.0.1"
+            type="text/javascript"></script>
+{% endblock javascripts %}
