@@ -1,0 +1,183 @@
+{% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %} Presentation {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} index-page {% endblock body_class %}
+
+{% block content %}
+    {% include "includes/navigation-light2.html" %}
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 d-flex justify-content-center flex-column">
+                    <div class="card d-flex blur justify-content-center p-4 shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
+                        <div class="text-center">
+                            <h3 class="text-gradient text-primary">{{ anketa.full_name }}</h3>
+                            <p class="mb-3">
+                                Персональные данные
+                            </p>
+                        </div>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <th>Full Name:</th>
+                                <td>{{ anketa.full_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Country:</th>
+                                <td>{{ anketa.country }}</td>
+                            </tr>
+                            <tr>
+                                <th>City:</th>
+                                <td>{{ anketa.city }}</td>
+                            </tr>
+                            <tr>
+                                <th>Age:</th>
+                                <td>{{ anketa.get_age_display }}</td>
+                            </tr>
+                            <tr>
+                                <th>Height:</th>
+                                <td>{{ anketa.height }} cm</td>
+                            </tr>
+                            <tr>
+                                <th>Weight:</th>
+                                <td>{{ anketa.weight }} kg</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <h3 class="text-gradient text-primary">{{ anketa.full_name }}</h3>
+                            <p class="mb-3">
+                                Менструальная функция
+                            </p>
+                        </div>
+                        {% if periods %}
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <th>Base Anketa:</th>
+                                    <td>{{ periods.base_anketa.full_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Menarche:</th>
+                                    <td>{{ periods.get_menarche_display }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Periods Type:</th>
+                                    <td>{{ periods.get_periods_type_display }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Year Break:</th>
+                                    <td>{{ periods.year_break }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Periods Break Variant:</th>
+                                    <td>{{ periods.get_periods_break_variant_display }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Break Type:</th>
+                                    <td>{{ periods.get_break_type_display }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Blood:</th>
+                                    <td>{{ periods.blood }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Blood Year:</th>
+                                    <td>{{ periods.blood_year }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Pregnancy Parity:</th>
+                                    <td>{{ periods.pregnancy_parity }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Childbirth Count:</th>
+                                    <td>{{ periods.childbirth_count }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Abortion Count:</th>
+                                    <td>{{ periods.abortion_count }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Misbirth Count:</th>
+                                    <td>{{ periods.misbirth_count }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Infertility Treatment:</th>
+                                    <td>{{ periods.infertility_treatment }}</td>
+                                </tr>
+                                <tr>
+                                    <th>BRT Program:</th>
+                                    <td>{{ periods.brt_program }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Contraception:</th>
+                                    <td>{{ periods.get_contraception_display }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Diseases of the Mammary Glands:</th>
+                                    <td>{{ periods.get_diseases_of_the_mammary_glands_display }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Somatic Status:</th>
+                                    <td>{{ periods.somatic_status }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Thyroid Gland Pathology:</th>
+                                    <td>{{ periods.thyroid_gland_Pathology }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Anemia:</th>
+                                    <td>{{ periods.anemia }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Diagnosis Year:</th>
+                                    <td>{{ periods.diagnosis_year }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Complaints 1:</th>
+                                    <td>{{ periods.complaints_1 }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Complaints 2:</th>
+                                    <td>{{ periods.complaints_2 }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Complaints 3:</th>
+                                    <td>{{ periods.complaints_3 }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Complaints 4:</th>
+                                    <td>{{ periods.complaints_4 }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Complaints 5:</th>
+                                    <td>{{ periods.complaints_5 }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Complaints 6:</th>
+                                    <td>{{ periods.complaints_6 }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Hemoglobin:</th>
+                                    <td>{{ periods.hemoglobin }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+    <script src="/static/assets/js/soft-design-system.min.js?v=1.0.1"
+            type="text/javascript"></script>
+{% endblock javascripts %}

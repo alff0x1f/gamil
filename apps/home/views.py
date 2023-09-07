@@ -183,6 +183,33 @@ class AnketaSuccessView(View):
         )
 
 
+class AnketasView(View):
+    def get(self, request):
+        return render(
+            request,
+            "home/results.html",
+            context={
+                "anketas": self.get_anketas(request),
+            },
+        )
+
+    def get_anketas(self, request):
+        if request.user.is_superuser:
+            return BaseAnketa.objects.all()
+        return BaseAnketa.objects.filter(owner=request.user)
+
+
+class AnketaShowView(View):
+    def get(self, request, pk):
+        base_anketa = BaseAnketa.objects.get(pk=pk)
+        context = {
+            "anketa": base_anketa,
+            "periods": PeriodsAnketa.objects.filter(base_anketa=base_anketa).first(),
+        }
+
+        return render(request, "home/anketa_show.html", context=context)
+
+
 # @login_required(login_url="/login/")
 def index(request):
     forms = {

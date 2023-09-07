@@ -7,7 +7,9 @@ from django.urls import path, re_path
 
 from apps.home import views
 from apps.home.views import (
+    AnketaShowView,
     AnketaSuccessView,
+    AnketasView,
     AnketaView,
     ArteryEmbolizationView,
     DoctorView,
@@ -18,7 +20,7 @@ from apps.home.views import (
 urlpatterns = [
     # The home page
     path("", NewAnketaView.as_view(), name="home"),
-    path("anketa/<int:pk>/", AnketaView.as_view(), name="anketa"),
+    path("anketa/<int:pk>/edit/", AnketaView.as_view(), name="anketa"),
     path(
         "anketa/<int:pk>/periods/",
         PeriodsView.as_view(),
@@ -39,6 +41,8 @@ urlpatterns = [
         AnketaSuccessView.as_view(),
         name="anketa_success",
     ),
+    path("anketas/", AnketasView.as_view(), name="anketas"),
+    path("anketa/<int:pk>/", AnketaShowView.as_view(), name="anketa_show"),
     # Matches any html file
     re_path(r"^.*\.*", views.pages, name="pages"),
 ]

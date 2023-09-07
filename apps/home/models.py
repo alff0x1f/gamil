@@ -86,6 +86,18 @@ class BaseAnketa(models.Model):
         verbose_name = "Базовая анкета"
         verbose_name_plural = "Базовые анкеты"
 
+    def populate_percent(self):
+        periods = PeriodsAnketa.objects.filter(base_anketa=self)
+        if not periods:
+            return 25
+        doctor = DoctorAnketa.objects.filter(base_anketa=self)
+        if not doctor:
+            return 50
+        artery = ArteryEmbolizationModel.objects.filter(base_anketa=self)
+        if not artery:
+            return 75
+        return 100
+
 
 class PeriodsAnketa(models.Model):
     base_anketa = models.ForeignKey(BaseAnketa, on_delete=models.CASCADE, null=True)
